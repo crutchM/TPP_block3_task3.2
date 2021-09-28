@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TPP_block3_task3.2:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>TPP_block3_task3.2</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="TPP-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="TPP_block3_task3.2:war exploded" />
+    </root>
+  </artifact>
+</component>
