@@ -2,31 +2,19 @@ package com.example.tpp;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class DirectoryWorker {
-    private ArrayList<File> content = new ArrayList<>();
-
-    public ArrayList<File> getContent(String path){
-        if(getDirectoryContent(path).compareTo(null) == 0){
-            return content;
-        } else return null;
+public class DirectoryWorker{
+    public List<FileModel> getListOfDirs(String path) {
+        String root = "C:\\Users\\sads1\\IdeaProjects\\TPP_block3_task3.2";
+        path = root + path.replace("/", "\\");
+        return Stream.of(new File(path).listFiles())
+                .map(file -> new FileModel(
+                        file.getName().replace("\\", "/"),
+                        file.isDirectory()
+                ))
+                .collect(Collectors.toList());
     }
-
-    private String getDirectoryContent(String path){
-        String result = "";
-        File dir = new File(path);
-        if(dir.compareTo(null) == 0){
-            return "directory:" + path + " does not exists";
-        } else {
-            if (dir.isDirectory()) {
-                for (File item : dir.listFiles()) {
-                    content.add(item);
-                }
-            } else {
-                return path + " is file";
-            }
-        }
-        return null;
-    }
-
 }
