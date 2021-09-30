@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/")
@@ -19,20 +20,14 @@ public class ServletDirectoriesGet  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DirectoryWorker dw = new DirectoryWorker();
         String path = req.getParameter("path");
-        List<String> content;
+        List<FileModel> content;
         if(path == null)
              content = new ArrayList<>();
-        else content = getContentNames(dw.getListOfDirs(path));
+        else content = dw.getListOfDirs(path);
+        Date date = new Date();
+        req.setAttribute("date", date.toString());
         req.setAttribute("content", content);
         req.setAttribute("path", path);
         req.getRequestDispatcher("directoryViewer.jsp").forward(req, resp);
-    }
-
-    private List<String> getContentNames(List<FileModel> content){
-        List<String> result = new ArrayList<>();
-        for(FileModel item : content){
-            result.add(item.getName());
-        }
-        return result;
     }
 }

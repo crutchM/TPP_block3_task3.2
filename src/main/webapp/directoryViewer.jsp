@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.tpp.FileModel" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,25 +11,33 @@
     <title>Document</title>
 </head>
 <body>
+    <h1><%=request.getAttribute("date")%></h1>
+    <br>
     <h1> directory: ${path} </h1>
     <h2>
+        <a href="./?path=<%=request.getAttribute("path").toString()%>/..">up</a>
+        <br>
         <%
-            if(request.getAttribute("content") == null){
-                %>
-            <br>
-            <a> пиздец посыпалось</a>
-            <%}
-                else{
-                ArrayList<String> list = (ArrayList<String>) request.getAttribute("content");
-                for(String e: list)
-                {
-                    %>
-                    <a> <%=e%> </a>
-                    <br>
-            <%
+            ArrayList<FileModel> list = (ArrayList<FileModel>)request.getAttribute("content");
+            for(FileModel e: list)
+            {
+                if(e.isDirectory()){
+        %>
+                <a href="./?path=<%=request.getAttribute("path")%>/<%=e.getName()%>">
+                    <%=e.getName()%>
+                </a>
+        <br>
+        <%
+                }else{%>
+                    <a href="http://localhost:8080/TPP_block3_task3_2_war_exploded/download/?path=<%=request.getAttribute("path")%>/<%=e.getName()%>"><%=e.getName()%></a>
+        <br>
+                <%
                 }
             }
-            %>
+        %>
+
+
+
     </h2>
 </body>
 </html>
