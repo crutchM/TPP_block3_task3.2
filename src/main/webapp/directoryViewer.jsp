@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.tpp.FileModel" %>
+<%@ page import="com.example.tpp.model.FileModel" %>
 <%@ page import="java.util.Date" %>
 <!doctype html>
 <html lang="en">

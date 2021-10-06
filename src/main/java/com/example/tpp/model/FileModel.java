@@ -1,4 +1,4 @@
-package com.example.tpp;
+package com.example.tpp.model;
 
 import java.util.Date;
 

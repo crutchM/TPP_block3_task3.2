@@ -1,14 +1,13 @@
 package com.example.tpp.servlets;
 
 import com.example.tpp.DirectoryWorker;
-import com.example.tpp.FileModel;
+import com.example.tpp.model.FileModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
