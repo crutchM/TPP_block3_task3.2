@@ -16,7 +16,9 @@ public class DirectoryWorker{
                 .map(file -> new FileModel(
                         //file.getName().replace("\\", "/"),
                         file.getName(),
-                        file.isDirectory()
+                        file.isDirectory(),
+                        file.length(),
+                        file.lastModified()
                 ))
                 .collect(Collectors.toList());
     }

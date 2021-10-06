@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.tpp.FileModel" %>
+<%@ page import="java.util.Date" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,10 +27,13 @@
                 <a href="./?path=<%=request.getAttribute("path")%>/<%=e.getName()%>">
                     <%=e.getName()%>
                 </a>
+        <a >    <%=e.getSize()%>    </a>
+        <a >    <%=new Date(e.getRedactDate())%>    </a>
         <br>
         <%
                 }else{%>
                     <a href="http://localhost:8080/TPP_block3_task3_2_war_exploded/download/?path=<%=request.getAttribute("path")%>/<%=e.getName()%>"><%=e.getName()%></a>
+                    <a>     <%=e.getSize()%> </a> <a>     <%=new Date(e.getRedactDate())%></a>
         <br>
                 <%
                 }
