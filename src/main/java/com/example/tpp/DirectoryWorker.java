@@ -13,6 +13,10 @@ public class DirectoryWorker{
         String root = "/home/crutchm/IdeaProjects/TPP_block3_task3.2/";
         //path = root + path.replace("/", "\\");
         path = root + path;
+        File f = new File(path);
+        if(!f.exists()){
+            f.mkdir();
+        }
         return Stream.of(new File(path).listFiles())
                 .map(file -> new FileModel(
                         //file.getName().replace("\\", "/"),

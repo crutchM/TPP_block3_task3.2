@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><%=request.getAttribute("date")%></h1>
+    <h1><%=request.getAttribute("date").toString()%></h1>
     <br>
     <h1> directory: ${path} </h1>
     <h2>
@@ -27,11 +27,18 @@
                 <a href="./?path=<%=request.getAttribute("path")%>/<%=e.getName()%>">
                     <%=e.getName()%>
                 </a>
-        <a >    <%=e.getSize()%>    </a>
-        <a >    <%=new Date(e.getRedactDate())%>    </a>
+
+        <a >
+            <%=e.getSize()%>
+        </a>
+        <a >
+            <%=new Date(e.getRedactDate())%>
+        </a>
         <br>
         <%
-                }else{%>
+                }
+                else{
+        %>
                     <a href="http://localhost:8080/TPP_block3_task3_2_war_exploded/download/?path=<%=request.getAttribute("path")%>/<%=e.getName()%>"><%=e.getName()%></a>
                     <a>     <%=e.getSize()%> </a> <a>     <%=new Date(e.getRedactDate())%></a>
         <br>

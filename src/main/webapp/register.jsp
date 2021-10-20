@@ -8,6 +8,19 @@
     <title>Document</title>
 </head>
 <body>
-
+already registered& <a href="./login?act=log">log in</a>
+<form method="post">
+    <label>
+        login:
+        <input type="text" placeholder="Min lenght - 3" name="login">
+    </label>
+    <br>
+    <label>
+        Password:
+        <input type="password" placeholder="Min lenght - 4" name="password">
+    </label>
+    <br>
+    <input type="submit" value="log in">
+</form>
 </body>
 </html>
