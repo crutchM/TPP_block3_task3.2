@@ -25,13 +25,13 @@ public class AccountService {
         }
 
         public static void addSession(User user, HttpSession session){
-            if(!sessions.containsKey(user.getLogin())){
+            if(!sessions.containsKey(user))
                 sessions.put(user, session);
-            }
         }
 
-        public static void logOut(User user){
-            sessions.remove(user.getLogin());
+        public static void logOut(User user)
+        {
+            sessions.remove(user);
         }
 
         public static User getById(String id){

@@ -20,16 +20,22 @@ public class ServletDirectoriesGet  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DirectoryWorker dw = new DirectoryWorker();
         String path = req.getParameter("path");
+
         File file = new File(path);
-        path = file.getAbsolutePath();
+        String absolutePath = file.getCanonicalPath();
         List<FileModel> content;
-        if(path == null)
-             content = new ArrayList<>();
-        else content = dw.getListOfDirs(path);
+        if (path != null) {
+            content = dw.getListOfDirs(path);
+        } else {
+            content = new ArrayList<>();
+        }
         Date date = new Date();
+        if (file.getCanonicalPath().equals("/")){
+           throw new IOException("похоже вы решили за пределы дозволенного, пожалуйста, вернитесь назад");
+        }
         req.setAttribute("date", date.toString());
         req.setAttribute("content", content);
-        req.setAttribute("path", path);
+        req.setAttribute("path", absolutePath);
         req.getRequestDispatcher("directoryViewer.jsp").forward(req, resp);
     }
 }

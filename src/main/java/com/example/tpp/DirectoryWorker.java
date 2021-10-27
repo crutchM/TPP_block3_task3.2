@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class DirectoryWorker{
     public List<FileModel> getListOfDirs(String path) {
         //String root = "C:\\Users\\sads1\\IdeaProjects\\TPP_block3_task3.2";
-        String root = "/home/crutchm/IdeaProjects/TPP_block3_task3.2/";
+        String root = "/home/crutchm/Desktop/edu/tpp/";
         //path = root + path.replace("/", "\\");
         path = root + path;
         File f = new File(path);

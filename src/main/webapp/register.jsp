@@ -8,19 +8,24 @@
     <title>Document</title>
 </head>
 <body>
-already registered& <a href="./login?act=log">log in</a>
+already registered? <a href="./login?act=log">log in</a>
 <form method="post">
     <label>
         login:
-        <input type="text" placeholder="Min lenght - 3" name="login">
+        <input type="text"  name="login">
     </label>
     <br>
     <label>
         Password:
-        <input type="password" placeholder="Min lenght - 4" name="password">
+        <input type="password"  name="password">
     </label>
     <br>
-    <input type="submit" value="log in">
+    <input type="submit" value="reg">
 </form>
+<br>
+<br>
+<% if(request.getAttribute("error") != null){%>
+<h1><%=request.getAttribute("error").toString()%></h1
+<%}%>
 </body>
 </html>

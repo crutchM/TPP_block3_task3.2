@@ -21,9 +21,10 @@
     </label>
     <br>
     <input type="submit" value="log in">
-    <br
+    <br>
+    <br>
     <% if(request.getAttribute("error") != null){%>
-    <h1><%=request.getAttribute("error")%></h1
+        <h1><%=request.getAttribute("error").toString()%></h1
     <%}%>
 </form>
 </body>

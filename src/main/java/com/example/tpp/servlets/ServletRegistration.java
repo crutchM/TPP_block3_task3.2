@@ -1,6 +1,6 @@
 package com.example.tpp.servlets;
 
-import com.example.tpp.model.User;
+import  com.example.tpp.model.User;
 import com.example.tpp.service.AccountService.Accounts;
 
 import javax.servlet.ServletException;
@@ -27,25 +27,33 @@ public class ServletRegistration extends HttpServlet {
         String login = r.getParameter("login");
         String pas = r.getParameter("password");
         if(Objects.equals(act, "reg")){
-            Accounts.addUsers(new User(login, pas), r.getSession());
-            Accounts.addSession(new User(login, pas), r.getSession());
-            redirect(new User(login, pas), r, re);
+            if(Accounts.checkUser(new User(login, pas))){
+                r.setAttribute("error", "user already exist");
+                re.sendRedirect("http://localhost:8080/TPP_block3_task3_2_war_exploded/login?act=reg");
+            }else {
+                Accounts.addUsers(new User(login, pas), r.getSession());
+                Accounts.addSession(new User(login, pas), r.getSession());
+                redirect(new User(login, pas), r, re);
+            }
         } else {
             if(Accounts.checkUser(new User(login, pas))){
-                if (Accounts.getById(r.getSession().getId()) != null)
-                    redirect(Accounts.getById(r.getSession().getId()), r, re);
+                if (Accounts.getById(r.getSession().getId()) != null) {
+                    r.setAttribute("error", "user already in system");
+                    re.sendRedirect("http://localhost:8080/TPP_block3_task3_2_war_exploded/login");
+                }
                 else {
                     Accounts.addSession(new User(login, pas), r.getSession());
                     redirect(new User(login, pas), r, re);
                 }
             } else {
-                r.setAttribute("error", "wrong password");
+                r.setAttribute("error", "smth wrong");
+                re.sendRedirect("http://localhost:8080/TPP_block3_task3_2_war_exploded/login");
             }
         }
     }
 
     private void redirect(User user, HttpServletRequest r, HttpServletResponse re) throws IOException{
-        re.sendRedirect(r.getContextPath().split("/login")[0] + "?path=" + user.getHomeDirectory());
+        re.sendRedirect("http://localhost:8080/TPP_block3_task3_2_war_exploded/ "+ "?path=" + user.getHomeDirectory());
     }
 
 }
