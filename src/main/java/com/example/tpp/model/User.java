@@ -1,5 +1,7 @@
 package com.example.tpp.model;
 
+import java.util.Objects;
+
 public class User extends Object{
     private String login;
     private String password;
@@ -13,19 +15,16 @@ public class User extends Object{
     }
 
     @Override
-    public boolean equals(Object obj){
-        User tmp = (User)obj;
-        return this.hashCode() == tmp.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return login.equals(user.login) && password.equals(user.password);
     }
 
     @Override
-    public int hashCode(){
-        int result = 0;
-        char[] tmp = login.toCharArray();
-        for(int i = 0; i < login.length(); i++){
-            result += tmp[i];
-        }
-        return (result + password.toCharArray()[2]) / homeDirectory.toCharArray()[3];
+    public int hashCode() {
+        return Objects.hash(login, password);
     }
 
     public String getLogin() {

@@ -24,7 +24,7 @@ public class ServletDirectoriesGet  extends HttpServlet {
         File file = new File(path);
         String absolutePath = file.getCanonicalPath();
         List<FileModel> content;
-        if (path != null) {
+        if (path.equals("")) {
             content = dw.getListOfDirs(path);
         } else {
             content = new ArrayList<>();
