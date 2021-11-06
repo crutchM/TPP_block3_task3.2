@@ -13,15 +13,8 @@ public class AccountService {
     public static class Accounts {
         //private static HashMap<String, String> users = new HashMap<>();
         private static HashMap<User, HttpSession> sessions = new HashMap<>();
-        private static DBHandler dbHandler;
+        private static final DBHandler dbHandler = new DBHandler();
 
-        static {
-            try {
-                dbHandler = DBHandler.getInstance();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
 
 
         public static void addUsers(User user, HttpSession session){

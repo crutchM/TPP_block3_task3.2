@@ -2,6 +2,7 @@ package com.example.tpp.servlets;
 
 import com.example.tpp.DirectoryWorker;
 import com.example.tpp.model.FileModel;
+import com.example.tpp.service.AccountService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,9 @@ public class ServletDirectoriesGet  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DirectoryWorker dw = new DirectoryWorker();
         String path = req.getParameter("path");
-
+        if (AccountService.Accounts.getById(req.getSession().getId()) == null){
+            resp.sendRedirect("http://localhost:8080/TPP_block3_task3_2_war_exploded/login?act=reg");
+        }
         File file = new File(path);
         String absolutePath = file.getCanonicalPath();
         List<FileModel> content;

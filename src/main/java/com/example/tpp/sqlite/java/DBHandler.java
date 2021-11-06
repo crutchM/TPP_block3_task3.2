@@ -1,35 +1,34 @@
 package com.example.tpp.sqlite.java;
 import com.example.tpp.model.User;
-import org.sqlite.JDBC;
 import java.sql.*;
 import java.util.*;
+import java.sql.DriverManager;
 
 public class DBHandler {
-    private static final String con_str = "jdbc:sqlite:/home/crutchm/Desktop/edu/tpp/src/main/java/com/example/tpp/sqlite/java/users.db";
-
-    private static DBHandler instance = null;
-
     private Connection connection;
-
-    public static DBHandler getInstance() throws SQLException{
-        if(instance == null)
-            instance = new DBHandler();
-        return instance;
-    }
-
-    private DBHandler() throws SQLException{
-        DriverManager.registerDriver(new JDBC());
-        this.connection = DriverManager.getConnection(con_str);
+    private static final String user = "root";
+    private static final String password = "22334455";
+    private static final String url = "jdbc:mysql://localhost/users";
+    public DBHandler(){
+        try {
+           Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+           DriverManager.registerDriver(driver);
+           this.connection =DriverManager.getConnection(url, user, password);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public List<User> getAllUsers(){
         try(Statement statement = this.connection.createStatement()){
-            List<User> users = new ArrayList<>();
+            ArrayList<User> users = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery("SELECT login, password FROM users");
             while (resultSet.next()){
                 users.add(new User(resultSet.getString("login"),
                         resultSet.getString("password")));
             }
+            if (users.isEmpty())
+                return Collections.emptyList();
             return users;
         } catch (SQLException e){
             e.printStackTrace();
@@ -39,10 +38,9 @@ public class DBHandler {
 
     public void addUser(User user){
         try (PreparedStatement statement = this.connection.prepareStatement(
-                "INSERT INTO users(`login`, `password`, `homeDirectory`) VALUES(?,?,?)")){
+                "INSERT INTO users(`login`, `password`) VALUES(?,?)")){
             statement.setObject(1, user.getLogin());
             statement.setObject(2, user.getPassword());
-            statement.setObject(3, user.getHomeDirectory());
             statement.execute();
         } catch (SQLException e){
             e.printStackTrace();
