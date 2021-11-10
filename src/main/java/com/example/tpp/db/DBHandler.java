@@ -1,4 +1,4 @@
-package com.example.tpp.sqlite.java;
+package com.example.tpp.db;
 import com.example.tpp.model.User;
 import java.sql.*;
 import java.util.*;

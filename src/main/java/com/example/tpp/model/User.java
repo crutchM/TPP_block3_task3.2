@@ -1,10 +1,18 @@
 package com.example.tpp.model;
 
+import javax.persistence.*;
 import java.util.Objects;
-
-public class User extends Object{
+@Entity
+@Table(name = "user")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "login")
     private String login;
+    @Column(name = "password")
     private String password;
+    @Column(name = "homeDirectory")
     private String homeDirectory;
 
     public User(String login, String password){
